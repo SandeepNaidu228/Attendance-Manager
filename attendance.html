@@ -34,7 +34,7 @@
 
         <div class="action-buttons">
             <button class="attendance-btn" onclick="window.location.href='manage_courses.html'">Manage Courses</button>
-            <button class="attendance-btn" onclick="window.location.href='index.html'">Exit</button>
+            <button class="attendance-btn" onclick="window.location.href='index.html'">Logout</button>
         </div>
     </div>
 
@@ -202,6 +202,7 @@
                 recordElement.className = 'attendance-record';
                 recordElement.innerHTML = `
                     <span class="record-date">${record.date}</span>
+                    <button class="remove-btn" onclick="removeAttendanceRecord('${courseId}', ${index})">Remove</button>
                     <div class="class-records">
                         ${record.classes.map((classRecord, classIndex) => `
                             <div class="class-record">
@@ -239,6 +240,19 @@
             course.attendanceRecords[recordIndex].classes[classIndex].notes = newNotes;
             
             localStorage.setItem('courses', JSON.stringify(courses));
+        }
+
+        function removeAttendanceRecord(courseId, recordIndex) {
+            if (confirm('Are you sure you want to remove this attendance record?')) {
+                const courses = JSON.parse(localStorage.getItem('courses'));
+                const course = courses.find(c => c.id === courseId);
+                
+                course.attendanceRecords.splice(recordIndex, 1);
+                
+                localStorage.setItem('courses', JSON.stringify(courses));
+                loadCourses();
+                openAttendancePortal(courseId); // Refresh the attendance portal
+            }
         }
 
         // Initialize the page
