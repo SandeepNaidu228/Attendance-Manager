@@ -121,5 +121,6 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ## Contact
 
 M V N Sandeep Naidu - mvnsandeepsandeep@gmail.com
+
 Project Link: https://github.com/SandeepNaidu228/Attendance-Manager
 ```
